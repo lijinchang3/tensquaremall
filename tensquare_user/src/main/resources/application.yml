@@ -1,0 +1,33 @@
+server: 
+  port: 9008
+
+spring: 
+  application:  
+    name: tensquare-user #指定服务名
+  datasource:  
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.174.129:3306/tensquare_user?characterEncoding=UTF8
+    username: root
+    password: root
+  jpa:
+    database: MySQL
+    show-sql: true
+  redis:
+    host: 192.168.174.129
+  rabbitmq: #消息队列
+    host: 192.168.174.129
+
+#基于 JWT(JSON Web Token) 的Token认证机制
+jwt:
+  config:
+    key: itcast
+    ttl: 360000
+
+# Eureka 服务注册中心
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:6868/eureka/
+  instance:
+    prefer-ip-address: true #服务之间可以相互调用
+

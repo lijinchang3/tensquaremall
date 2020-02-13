@@ -1,0 +1,34 @@
+server:
+  port: 9011
+
+spring:
+  application:
+    name: tensquare-manager  #模块名称
+
+#基于 JWT(JSON Web Token) 的Token认证机制
+jwt:
+  config:
+    key: itcast
+    ttl: 360000
+
+# Eureka 服务注册中心
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:6868/eureka/
+  instance:
+    prefer-ip-address: true #服务之间可以相互调用
+
+# 网关
+zuul:
+  routes:
+    tensquare-base: #模块名
+      path: /base/**  #配置请求URL的请求规则，例如本次访问base模块的 findAll,可以使用: http:127.0.0.1:9011/base/label
+      serviceId: tensquare-base #指定Eureka服务注册中心的服务id
+    tensquare-qa:
+      path: /qa/**
+      serviceId: tensquare-qa
+    tensquare-user:
+      path: /user/**
+      serviceId: tensquare-user
+

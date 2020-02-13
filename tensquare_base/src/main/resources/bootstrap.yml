@@ -1,0 +1,11 @@
+#该文件优先级比 application.yml 优先级高
+#所以有了该文件，就不会去读取 application.yml 了
+#此配置通过 tensquare_config 模块的微服务去读取 gitee 仓库上的 base-dev.yml 文件了
+#由于该模块还配置了 Eureka，所以还要先启动 tensquare_eureka 模块
+spring:
+  cloud:
+    config:
+      name: base # base-dev.yml 文件的前半部分
+      profile: dev #base-dev.yml 文件的后半部分
+      label: master #base-dev.yml 文件在 git 上的分支
+      uri: http://127.0.0.1:12000  #对应config模块可访问的地址：http:127.0.0.1:12000/base-dev.yml

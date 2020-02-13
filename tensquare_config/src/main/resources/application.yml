@@ -1,0 +1,23 @@
+server:
+  port: 12000
+
+spring:
+  application:
+    name: tensquare-config
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://gitee.com/chen_wp/tensquare-config.git #gitee仓库的路径
+  rabbitmq:
+    host: 192.168.174.129
+
+#当有模块在git上的配置文件有改动时，就不用重启模块的服务了
+#在 postman 访问 Url: http://127.0.0.1:12000/actuator/bus-refresh     Method:post
+#访问过了才会往 rabbitmq 发送消息，这样tensquare_config模块才能监听到有配置文件已经改动
+#暴露触发消息总线的地址
+management:
+  endpoints:
+    web:
+      exposure:
+        include: bus-refresh #这个是固定的写法

@@ -1,0 +1,29 @@
+server: 
+  port: 9003
+spring: 
+  application:  
+    name: tensquare-qa #指定服务名
+  datasource:  
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.174.129:3306/tensquare_qa?characterEncoding=UTF8
+    username: root
+    password: root
+  jpa: 
+    database: MySQL
+    show-sql: true
+
+#基于 JWT(JSON Web Token) 的Token认证机制
+jwt:
+  config:
+    key: itcast
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:6868/eureka/
+  instance:
+    prefer-ip-address: true #服务之间可以相互调用
+
+feign:
+  hystrix:
+    enabled: true #开启熔断器
