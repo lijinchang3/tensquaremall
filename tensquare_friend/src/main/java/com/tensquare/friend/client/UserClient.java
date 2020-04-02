@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Component
 @FeignClient("tensquare-user") //指定服务名
 public interface UserClient {
-
     /**
      * 调用的方法
      *
@@ -22,5 +21,4 @@ public interface UserClient {
      */
     @RequestMapping(value = "/user/{userid}/{friendid}/{x}", method = RequestMethod.PUT)
     void updatefanscountandfollowcount(@PathVariable("userid") String userid, @PathVariable("friendid") String friendid, @PathVariable("x") int x);
-
 }
